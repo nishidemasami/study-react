@@ -1,0 +1,96 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:import/recommended",
+    "plugin:jsx-a11y/strict",
+    "plugin:react/all",
+    "eslint:all",
+    "airbnb-base",
+    "plugin:prettier/recommended",
+    "plugin:jest/recommended",
+    "prettier"
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "jest/globals": true
+  },
+  "plugins": [
+    "react",
+    "jest",
+    "jsx-a11y",
+    "import",
+    "@typescript-eslint",
+    "prettier"
+  ],
+  "globals": {
+    "graphql": true,
+    "React": true,
+    "JSX": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".json", ".ts", ".tsx"]
+      },
+      "typescript": {},
+      "webpack": {}
+    }
+  },
+  "rules": {
+    "import/imports-first": "warn",
+    "global-require": "warn",
+    "class-methods-use-this": "warn",
+    "arrow-body-style": ["error", "as-needed"],
+    "arrow-parens": ["error", "always"],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ],
+    "no-debugger": "warn",
+    "dot-notation": "warn",
+    "no-console": "warn",
+    "new-cap": "warn",
+    "strict": "warn",
+    "no-param-reassign": [
+      "error",
+      {
+        "props": false
+      }
+    ],
+    "no-underscore-dangle": "warn",
+    "eol-last": "warn",
+    "no-shadow": "warn",
+    "quotes": ["warn", "double"],
+    "jsx-quotes": ["warn", "prefer-double"],
+    "react/jsx-no-undef": "warn",
+    "react/jsx-uses-react": "warn",
+    "react/jsx-uses-vars": "warn",
+    "react/jsx-filename-extension": [
+      "error",
+      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+    ],
+
+    // This Project Only
+    "react/jsx-no-literals": "off",
+    "react/jsx-max-depth": "off",
+    "react/jsx-no-bind": "off",
+    "react/forbid-component-props": "off",
+
+    // for prettier
+    "comma-dangle": "off",
+
+    // for TypeScript
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "react/require-default-props": "off",
+
+    // for webpack
+    "import/extensions": ["off", [".js", ".jsx", ".json", ".ts", ".tsx"]]
+  }
+}
