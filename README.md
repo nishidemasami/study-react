@@ -1,4 +1,4 @@
-# 必要なもの
+# インストールが必要なもの
 
 - Git
 - VSCode
@@ -11,6 +11,7 @@
 
 # 手順
 
+1. git の文字コードの設定を CRLF をしない設定にする
 1. git から`git clone git@github.com:nishidemasami/study-react.git`で clone してくる
 1. git で clone したディレクトリで`npm install`もしくは`yarn install`する。node_modules にいっぱいいろいろダウンロードされることを確認する
 1. `npm run start`もしくは`yarn start`で起動して、[http://localhost:3000/](http://localhost:3000/)でページが見れることを確認する
@@ -18,3 +19,9 @@
 # 例
 
 [https://nishidemasami.github.io/study-react/](https://nishidemasami.github.io/study-react/)
+
+# エラーが出る時
+
+- `npm install`してみる
+- VSCodeを再起動してみる
+- node_modulesを削除して再度`npm install`してみる

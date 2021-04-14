@@ -1,4 +1,10 @@
 {
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#580000",
+    "titleBar.activeForeground": "#ffffff",
+    "activityBarBadge.background": "#580000"
+  },
+
   "typescript.updateImportsOnFileMove.enabled": "always",
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",

@@ -1,0 +1,12 @@
+.SpinLogo {
+  &-logo {
+    height: 40vmin;
+    pointer-events: none;
+
+    &-spin {
+      height: 40vmin;
+      pointer-events: none;
+      animation: App-logo-spin infinite 1s linear;
+    }
+  }
+}
