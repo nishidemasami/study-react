@@ -7,17 +7,13 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@material-ui/core";
-import {
-  Autorenew,
-  Cancel,
-  ExposurePlus1,
-  Menu as MenuIcon,
-} from "@material-ui/icons";
+import { Cancel, Menu as MenuIcon } from "@material-ui/icons";
 import { shallowEqual } from "react-redux";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { setComponent, setOpenMenu } from "../../redux/state/app";
+import { menuList, setComponent, setOpenMenu } from "../../redux/state/app";
 import { RootState } from "../../redux/store";
 import "./Menu.scss";
+import MenuItems from "./MenuItems";
 
 function Menu(): JSX.Element {
   const { appState } = useAppSelector(
@@ -40,40 +36,33 @@ function Menu(): JSX.Element {
       >
         <div onKeyDown={() => dispatch(setOpenMenu(false))} role="presentation">
           <List>
-            {["Cancel"].map((text) => (
-              <ListItem
-                button
-                key={text}
-                onClick={() => {
-                  dispatch(setOpenMenu(false));
-                }}
-              >
-                <ListItemIcon>
-                  <Cancel />
-                </ListItemIcon>
-                <ListItemText primary="閉じる" />
-              </ListItem>
-            ))}
+            <ListItem
+              button
+              onClick={() => {
+                dispatch(setOpenMenu(false));
+              }}
+            >
+              <ListItemIcon>
+                <Cancel />
+              </ListItemIcon>
+              <ListItemText primary="閉じる" />
+            </ListItem>
           </List>
           <Divider />
           <List>
-            {(["count", "spinLogo"] as typeof appState.component[]).map(
-              (text) => (
-                <ListItem
-                  button
-                  key={text}
-                  onClick={() => {
-                    dispatch(setComponent(text));
-                    dispatch(setOpenMenu(false));
-                  }}
-                >
-                  <ListItemIcon>
-                    {text === "count" ? <ExposurePlus1 /> : <Autorenew />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItem>
-              )
-            )}
+            {menuList.map((menu) => (
+              <ListItem
+                button
+                key={menu}
+                onClick={() => {
+                  dispatch(setComponent(menu));
+                  dispatch(setOpenMenu(false));
+                }}
+              >
+                <ListItemIcon>{MenuItems[menu].icon}</ListItemIcon>
+                <ListItemText primary={MenuItems[menu].name} />
+              </ListItem>
+            ))}
           </List>
         </div>
       </Drawer>

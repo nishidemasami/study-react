@@ -7,12 +7,15 @@ import { setProgress } from "../state/count";
  * @param second 秒数
  * @remarks
  * second秒後にpercent%の確率でtrueを返し、
- * でなければfalseを返す
+ * でなければrejectする
  */
-const judgment = (percent: number, second: number) =>
-  new Promise<boolean>((resolve) => {
+const judgment = async (percent: number, second: number) =>
+  new Promise<boolean>((resolve, reject) => {
     setTimeout(() => {
-      resolve(Math.random() < percent / 100);
+      if (Math.random() < percent / 100) {
+        resolve(true);
+      }
+      reject(new Error());
     }, second * 1000);
   });
 
@@ -44,7 +47,7 @@ const fetchCounter = createAsyncThunk<
   async (arg, thunk): Promise<fetchCounterReturnType> => {
     thunk.dispatch(setProgress(true));
 
-    const res = await judgment(arg.percent, arg.second);
+    const res = await judgment(arg.percent, arg.second).catch(() => false);
 
     thunk.dispatch(setProgress(false));
 

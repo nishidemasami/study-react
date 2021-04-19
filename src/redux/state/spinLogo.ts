@@ -10,7 +10,7 @@ interface SpinLogoState {
 const initialState: SpinLogoState = {
   spin: false,
 };
-export const spinLogoSlice = createSlice({
+const spinLogoSlice = createSlice({
   name: "spinLogo",
   initialState,
   reducers: {

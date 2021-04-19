@@ -20,7 +20,7 @@ const initialState: CounterState = {
   count: 0,
   percent: 50,
 };
-export const countSlice = createSlice({
+const countSlice = createSlice({
   name: "count",
   initialState,
   reducers: {
