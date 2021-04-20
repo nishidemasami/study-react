@@ -24,6 +24,7 @@ const countSlice = createSlice({
   name: "count",
   initialState,
   reducers: {
+    /** 確率を設定する */
     setShowingPercent: (state, action: PayloadAction<number>) => {
       state.percent = action.payload;
     },

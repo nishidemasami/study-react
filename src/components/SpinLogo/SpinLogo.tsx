@@ -1,17 +1,17 @@
 import { Button } from "@material-ui/core";
 import { shallowEqual } from "react-redux";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useDispatch, useSelector } from "../../redux/hooks";
 import { setSpinLogo } from "../../redux/state/spinLogo";
 import { RootState } from "../../redux/store";
 import logo from "./logo.svg";
 import "./SpinLogo.scss";
 
 function SpinLogo(): JSX.Element {
-  const { spinLogoState } = useAppSelector(
+  const { spinLogoState } = useSelector(
     (state: RootState) => state,
     shallowEqual
   );
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   return (
     <>

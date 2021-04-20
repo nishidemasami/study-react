@@ -3,14 +3,11 @@ import { shallowEqual } from "react-redux";
 import "./App.scss";
 import Menu from "./components/Menu";
 import MenuItems from "./components/Menu/MenuItems";
-import { useAppSelector } from "./redux/hooks";
+import { useSelector } from "./redux/hooks";
 import { RootState } from "./redux/store";
 
 function App(): JSX.Element {
-  const { appState } = useAppSelector(
-    (state: RootState) => state,
-    shallowEqual
-  );
+  const { appState } = useSelector((state: RootState) => state, shallowEqual);
   return (
     <>
       <React.StrictMode>

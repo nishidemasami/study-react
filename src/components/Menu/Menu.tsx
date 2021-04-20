@@ -9,18 +9,15 @@ import {
 } from "@material-ui/core";
 import { Cancel, Menu as MenuIcon } from "@material-ui/icons";
 import { shallowEqual } from "react-redux";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useDispatch, useSelector } from "../../redux/hooks";
 import { menuList, setComponent, setOpenMenu } from "../../redux/state/app";
 import { RootState } from "../../redux/store";
 import "./Menu.scss";
 import MenuItems from "./MenuItems";
 
 function Menu(): JSX.Element {
-  const { appState } = useAppSelector(
-    (state: RootState) => state,
-    shallowEqual
-  );
-  const dispatch = useAppDispatch();
+  const { appState } = useSelector((state: RootState) => state, shallowEqual);
+  const dispatch = useDispatch();
 
   return (
     <>

@@ -5,7 +5,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { shallowEqual } from "react-redux";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useDispatch, useSelector } from "../../redux/hooks";
 import {
   decrement,
   increment,
@@ -16,11 +16,8 @@ import fetchLastCounter from "../../redux/thunk/fetchCounter";
 import "./Count.scss";
 
 function Count(): JSX.Element {
-  const { countState } = useAppSelector(
-    (state: RootState) => state,
-    shallowEqual
-  );
-  const dispatch = useAppDispatch();
+  const { countState } = useSelector((state: RootState) => state, shallowEqual);
+  const dispatch = useDispatch();
 
   return (
     <>
