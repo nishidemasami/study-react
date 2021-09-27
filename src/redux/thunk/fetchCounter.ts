@@ -10,27 +10,27 @@ import { setProgress } from "../state/count";
  * でなければrejectする
  */
 const judgment = async (percent: number, second: number) =>
-  new Promise<boolean>((resolve, reject) => {
-    setTimeout(() => {
-      if (Math.random() < percent / 100) {
-        resolve(true);
-      }
-      reject(new Error());
-    }, second * 1000);
-  });
+	new Promise<boolean>((resolve, reject) => {
+		setTimeout(() => {
+			if (Math.random() < percent / 100) {
+				resolve(true);
+			}
+			reject(new Error());
+		}, second * 1000);
+	});
 
 type fetchCounterArgType = {
-  /** 増える確率 */
-  percent: number;
-  /** 秒数 */
-  second: number;
-  /** 値 */
-  value: number;
+	/** 増える確率 */
+	percent: number;
+	/** 秒数 */
+	second: number;
+	/** 値 */
+	value: number;
 };
 
 type fetchCounterReturnType = {
-  /** 増減値 */
-  count: number;
+	/** 増減値 */
+	count: number;
 };
 
 /**
@@ -40,23 +40,23 @@ type fetchCounterReturnType = {
  * でなければ例外を返す
  */
 const fetchCounter = createAsyncThunk<
-  fetchCounterReturnType,
-  fetchCounterArgType
+	fetchCounterReturnType,
+	fetchCounterArgType
 >(
-  "lastcount/fetch",
-  async (arg, thunk): Promise<fetchCounterReturnType> => {
-    thunk.dispatch(setProgress(true));
+	"lastcount/fetch",
+	async (arg, thunk): Promise<fetchCounterReturnType> => {
+		thunk.dispatch(setProgress(true));
 
-    const res = await judgment(arg.percent, arg.second).catch(() => false);
+		const res = await judgment(arg.percent, arg.second).catch(() => false);
 
-    thunk.dispatch(setProgress(false));
+		thunk.dispatch(setProgress(false));
 
-    if (res) {
-      return { count: arg.value };
-    }
+		if (res) {
+			return { count: arg.value };
+		}
 
-    throw new Error("fetch count error");
-  }
+		throw new Error("fetch count error");
+	}
 );
 
 export default fetchCounter;

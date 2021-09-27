@@ -7,19 +7,19 @@ import { useSelector } from "./redux/hooks";
 import { RootState } from "./redux/store";
 
 function App(): JSX.Element {
-  const { appState } = useSelector((state: RootState) => state, shallowEqual);
-  return (
-    <>
-      <React.StrictMode>
-        <div className="App">
-          <header className="App-header">
-            {MenuItems[appState.component].component}
-          </header>
-        </div>
-      </React.StrictMode>
-      <Menu />
-    </>
-  );
+	const { appState } = useSelector((state: RootState) => state, shallowEqual);
+	return (
+		<>
+			<React.StrictMode>
+				<div className="App">
+					<header className="App-header">
+						{MenuItems[appState.component].component}
+					</header>
+				</div>
+			</React.StrictMode>
+			<Menu />
+		</>
+	);
 }
 
 export default App;

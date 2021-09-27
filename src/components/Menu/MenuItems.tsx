@@ -7,22 +7,22 @@ import SpinLogo from "../SpinLogo";
  * メニューアイテム一覧
  */
 const MenuItems: {
-  [menu in menuComponents]: {
-    component: JSX.Element;
-    name: string;
-    icon: JSX.Element;
-  };
+	[menu in menuComponents]: {
+		component: JSX.Element;
+		name: string;
+		icon: JSX.Element;
+	};
 } = {
-  count: {
-    component: <Count />,
-    name: "カウントアップ",
-    icon: <ExposurePlus1 />,
-  },
-  spinLogo: {
-    component: <SpinLogo />,
-    name: "ロゴまわし",
-    icon: <Autorenew />,
-  },
+	count: {
+		component: <Count />,
+		name: "カウントアップ",
+		icon: <ExposurePlus1 />,
+	},
+	spinLogo: {
+		component: <SpinLogo />,
+		name: "ロゴまわし",
+		icon: <Autorenew />,
+	},
 };
 
 export default MenuItems;

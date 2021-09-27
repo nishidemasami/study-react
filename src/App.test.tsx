@@ -5,11 +5,11 @@ import App from "./App";
 import { store } from "./redux/store";
 
 test("renders learn react link", () => {
-  render(
-    <Provider store={store}>
-      <App />
-    </Provider>
-  );
-  const element = screen.getByText(/確率/i);
-  expect(element).toBeInTheDocument();
+	render(
+		<Provider store={store}>
+			<App />
+		</Provider>
+	);
+	const element = screen.getByText(/確率/i);
+	expect(element).toBeInTheDocument();
 });

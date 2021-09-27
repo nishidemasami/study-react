@@ -1,23 +1,25 @@
 {
-  "workbench.colorCustomizations": {
-    "titleBar.activeBackground": "#580000",
-    "titleBar.activeForeground": "#ffffff",
-    "activityBarBadge.background": "#580000"
-  },
+	"workbench.colorCustomizations": {
+		"titleBar.activeBackground": "#580000",
+		"titleBar.activeForeground": "#ffffff",
+		"activityBarBadge.background": "#580000"
+	},
 
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": true,
-    "source.fixAll.eslint": true
-  },
-  "eslint.workingDirectories": ["./*"],
-  "files.eol": "\n",
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ]
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.codeActionsOnSave": {
+		"source.organizeImports": true,
+		"source.fixAll.eslint": true
+	},
+	"editor.tabSize": 4,
+	"editor.insertSpaces": false,
+	"eslint.workingDirectories": ["./*"],
+	"files.eol": "\n",
+	"eslint.validate": [
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact"
+	]
 }
