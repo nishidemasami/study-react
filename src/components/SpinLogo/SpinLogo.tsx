@@ -35,7 +35,13 @@ const SpinLogo: React.VFC = () => {
 
 	return (
 		<>
-			<RollingImage alt="logo" data-spinning={spinLogoState.spin} src={logo} />
+			<p>
+				<RollingImage
+					alt="logo"
+					data-spinning={spinLogoState.spin}
+					src={logo}
+				/>
+			</p>
 			<p>
 				<Button
 					color="primary"
