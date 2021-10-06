@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { setProgress } from "../state/count";
+import { actions } from "../state/count";
 
 /**
  * 遅延判定メソッド
@@ -42,21 +42,18 @@ type fetchCounterReturnType = {
 const fetchCounter = createAsyncThunk<
 	fetchCounterReturnType,
 	fetchCounterArgType
->(
-	"lastcount/fetch",
-	async (arg, thunk): Promise<fetchCounterReturnType> => {
-		thunk.dispatch(setProgress(true));
+>("lastcount/fetch", async (arg, thunk): Promise<fetchCounterReturnType> => {
+	thunk.dispatch(actions.setProgress(true));
 
-		const res = await judgment(arg.percent, arg.second).catch(() => false);
+	const res = await judgment(arg.percent, arg.second).catch(() => false);
 
-		thunk.dispatch(setProgress(false));
+	thunk.dispatch(actions.setProgress(false));
 
-		if (res) {
-			return { count: arg.value };
-		}
-
-		throw new Error("fetch count error");
+	if (res) {
+		return { count: arg.value };
 	}
-);
+
+	throw new Error("fetch count error");
+});
 
 export default fetchCounter;

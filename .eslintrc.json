@@ -75,6 +75,13 @@
 			{ "extensions": [".js", ".jsx", ".ts", ".tsx"] }
 		],
 
+		// for good development experience
+		"no-warning-comments": "warn",
+		"react/function-component-definition": [
+			"warn",
+			{ "namedComponents": "arrow-function" }
+		],
+
 		// This Project Only
 		"react/jsx-no-literals": "off",
 		"react/jsx-max-depth": "off",

@@ -5,17 +5,18 @@ import {
 	Typography,
 } from "@material-ui/core";
 import { shallowEqual } from "react-redux";
+import styled from "styled-components";
 import { useDispatch, useSelector } from "../../redux/hooks";
-import {
-	decrement,
-	increment,
-	setShowingPercent,
-} from "../../redux/state/count";
+import { actions } from "../../redux/state/count";
 import { RootState } from "../../redux/store";
 import fetchLastCounter from "../../redux/thunk/fetchCounter";
-import "./Count.scss";
 
-function Count(): JSX.Element {
+/** 良い幅のスライダー */
+const GoodWidthSlider = styled(Slider)`
+	max-width: 40vmin;
+`;
+
+const Count: React.VFC = () => {
 	const { countState } = useSelector((state: RootState) => state, shallowEqual);
 	const dispatch = useDispatch();
 
@@ -26,7 +27,7 @@ function Count(): JSX.Element {
 				<Button
 					color="primary"
 					onClick={() => {
-						dispatch(increment());
+						dispatch(actions.increment());
 					}}
 					variant="contained"
 				>
@@ -35,7 +36,7 @@ function Count(): JSX.Element {
 				<Button
 					color="secondary"
 					onClick={() => {
-						dispatch(decrement());
+						dispatch(actions.decrement());
 					}}
 					variant="contained"
 				>
@@ -45,14 +46,13 @@ function Count(): JSX.Element {
 			<Typography id="percent-slider-label">
 				確率：{countState.percent}%
 			</Typography>
-			<Slider
+			<GoodWidthSlider
 				aria-labelledby="percent-slider-label"
-				className="Count-percent-slider"
 				disabled={countState.progress}
 				max={100}
 				min={0}
 				onChange={(e, newValue: number | number[]) =>
-					dispatch(setShowingPercent(newValue as number))
+					dispatch(actions.setShowingPercent(newValue as number))
 				}
 				value={countState.percent}
 				valueLabelDisplay="off"
@@ -79,6 +79,6 @@ function Count(): JSX.Element {
 			{countState.progress && <CircularProgress />}
 		</>
 	);
-}
+};
 
 export default Count;

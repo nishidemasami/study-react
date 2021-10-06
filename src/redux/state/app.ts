@@ -34,7 +34,7 @@ const appSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setComponent, setOpenMenu } = appSlice.actions;
+export const { actions } = appSlice;
 
 const appReducer = appSlice.reducer;
 export default appReducer;

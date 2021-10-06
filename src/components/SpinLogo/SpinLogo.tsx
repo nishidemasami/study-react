@@ -1,12 +1,32 @@
 import { Button } from "@material-ui/core";
+import React from "react";
 import { shallowEqual } from "react-redux";
+import styled from "styled-components";
 import { useDispatch, useSelector } from "../../redux/hooks";
-import { setSpinLogo } from "../../redux/state/spinLogo";
+import { actions } from "../../redux/state/spinLogo";
 import { RootState } from "../../redux/store";
 import logo from "./logo.svg";
-import "./SpinLogo.scss";
 
-function SpinLogo(): JSX.Element {
+/** まわるdiv */
+const RollingImage = styled.img`
+	height: 40vmin;
+	pointer-events: none;
+
+	&[data-spinning="true"] {
+		animation: App-logo-spin infinite 1s linear;
+	}
+
+	@keyframes App-logo-spin {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+`;
+
+const SpinLogo: React.VFC = () => {
 	const { spinLogoState } = useSelector(
 		(state: RootState) => state,
 		shallowEqual
@@ -15,16 +35,12 @@ function SpinLogo(): JSX.Element {
 
 	return (
 		<>
-			<img
-				alt="logo"
-				className={spinLogoState.spin ? "SpinLogo-logo-spin" : "SpinLogo-logo"}
-				src={logo}
-			/>
+			<RollingImage alt="logo" data-spinning={spinLogoState.spin} src={logo} />
 			<p>
 				<Button
 					color="primary"
 					onClick={() => {
-						dispatch(setSpinLogo(!spinLogoState.spin));
+						dispatch(actions.setSpinLogo(!spinLogoState.spin));
 					}}
 					variant="contained"
 				>
@@ -33,6 +49,6 @@ function SpinLogo(): JSX.Element {
 			</p>
 		</>
 	);
-}
+};
 
 export default SpinLogo;

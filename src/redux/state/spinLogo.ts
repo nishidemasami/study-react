@@ -21,7 +21,7 @@ const spinLogoSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setSpinLogo } = spinLogoSlice.actions;
+export const { actions } = spinLogoSlice;
 
 const spinLogoReducer = spinLogoSlice.reducer;
 export default spinLogoReducer;
