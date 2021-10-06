@@ -37,9 +37,11 @@ const App: React.VFC = () => {
 			<React.StrictMode>
 				<AppDiv>
 					<MainHeader>
+						「
 						<a href="https://github.com/nishidemasami/study-react">
-							<p>Welcome to https://github.com/nishidemasami/study-react</p>
+							https://github.com/nishidemasami/study-react
 						</a>
+						」を参照して下さい
 						{MenuItems[appState.component].component}
 					</MainHeader>
 				</AppDiv>
