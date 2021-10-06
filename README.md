@@ -1,30 +1,32 @@
-# インストールが必要なもの
+# あらかじめインストールが必要なもの
 
 - Git
 - VSCode
 - Node.js
+- yarn
 
 # VSCode でインストールするプラグイン
 
 - ESLint(dbaeumer.vscode-eslint)
 - Prettier(esbenp.prettier-vscode)
+- vscode-styled-components(jpoissonnier.vscode-styled-components)
 
 # 手順
 
-1. git の文字コードの設定を CRLF をしない設定にする(Global の `AutoCrlf` を false にする)
+1. git の文字コードの設定を CRLF にしない設定にする(Global の `AutoCrlf` を false にする)
 1. `git clone git@github.com:nishidemasami/study-react.git`を実行して GitHub から clone してくる
-1. git で clone して作成されたディレクトリで`npm install`を実行する。`node_modules`ディレクトリに、モジュール(ライブラリ)がいっぱいいろいろダウンロードされたことを確認する
-1. `npm run start`を実行して起動して、<http://localhost:3000/>でページが見れることを確認する
+1. git で clone して作成されたディレクトリで`yarn install`を実行する。`node_modules`ディレクトリに、モジュール(ライブラリ)がいっぱいいろいろダウンロードされたことを確認する
+1. `yarn start`を実行して起動して、<http://localhost:3000/>でページが見れることを確認する
 
-# ビルドしたものがこちらになります
+# ビルドしたもの
 
 <https://nishidemasami.github.io/study-react/>
 
 # エラーが出る時
 
-- もう一度`npm install`してみる
+- もう一度`yarn install`してみる
 - VSCode を再起動してみる
-- node_modules を削除してもう一度`npm install`してみる
+- node_modules を削除してもう一度`yarn install`してみる
 
 # 処理の流れ
 
@@ -32,51 +34,51 @@
 
 # 各ファイルの説明
 
-| ファイル・ディレクトリ                  | 説明                                                                                                                                                |
-| :-------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 📄.eslintrc.json                        | ESLint の設定ファイル                                                                                                                               |
-| 📁.git                                  | git の管理用ファイル(自動生成)                                                                                                                      |
-| 📄.gitignore                            | git で無視するファイル・ディレクトリの設定                                                                                                          |
-| 📄.prettierrc                           | Prettier の設定ファイル                                                                                                                             |
-| 📄package-lock.json                     | npm のパッケージとそのバージョンの管理用ファイル(自動生成)                                                                                          |
-| 📄package.json                          | npm のパッケージの管理やアプリケーションの設定などの設定ファイル                                                                                    |
-| 📄README.md                             | このファイル                                                                                                                                        |
-| 📄tsconfig.json                         | TypeScript の設定ファイル                                                                                                                           |
-| 📁.vscode                               | VSCode の設定ファイルを保存するディレクトリ                                                                                                         |
-| 📄.vscode/settings.json                 | VSCode の設定ファイル                                                                                                                               |
-| 📄.vscode/launch.json                   | VSCode のデバッグの設定ファイル(未作成)                                                                                                             |
-| 📁docs                                  | GitHub Pages(<https://nishidemasami.github.io/study-react/>)用の公開ディレクトリ(`npm run build`を実行して生成されたものを手動でここに保存している) |
-| 📁build                                 | `npm run build`を実行すると作成される、ビルドで生成されたファイルが保存されるディレクトリ。                                                         |
-| 📁node_modules                          | `npm install`を実行すると作成される、モジュール(ライブラリ)が保存されているディレクトリ。                                                           |
-| 📁public                                | 公開用ディレクトリ(ビルド用)                                                                                                                        |
-| 📄public/favicon.ico                    | ファビコン                                                                                                                                          |
-| 📄public/index.html                     | index.html                                                                                                                                          |
-| 📄public/logo192.png                    | ロゴ(高解像度ファビコン用)                                                                                                                          |
-| 📄public/logo512.png                    | ロゴ(高解像度ファビコン用)                                                                                                                          |
-| 📄public/manifest.json                  | WEB サイト設定ファイル                                                                                                                              |
-| 📄public/robots.txt                     | クローラ・ボット用設定ファイル                                                                                                                      |
-| 📁src                                   | ソースディレクトリ                                                                                                                                  |
-| 📄src/App.scss                          | src/App.tsx 用のスタイルシート                                                                                                                      |
-| 📄src/App.test.tsx                      | アプリケーションのルートとなるコンポーネントのテストコード(適当)                                                                                    |
-| 📄src/App.tsx                           | アプリケーションのルートとなるコンポーネント                                                                                                        |
-| 📄src/index.css                         | src/index.tsx 用のスタイルシート                                                                                                                    |
-| 📄src/index.tsx                         | App を呼び出している。<br />これが public/index.html の`<div id="root" />`へ描画している。                                                          |
-| 📄src/react-app-env.d.ts                | react-app の型定義を参照することを宣言しているらしい(Create React App 由来)                                                                         |
-| 📄src/setupTests.ts                     | テストの実行に必要なライブラリをインポートしているらしい(Create React App 由来)                                                                     |
-| 📄src/components/Count/Count.scss       | Count コンポーネント用のスタイルシート                                                                                                              |
-| 📄src/components/Count/Count.tsx        | Count コンポーネントを実装している。                                                                                                                |
-| 📄src/components/Count/index.ts         | Count コンポーネントを`export default`している。                                                                                                    |
-| 📄src/components/Menu/index.ts          | Menu コンポーネントを`export default`している。                                                                                                     |
-| 📄src/components/Menu/Menu.scss         | メニュー用のスタイルシート                                                                                                                          |
-| 📄src/components/Menu/Menu.tsx          | 左側にニョキッと出るメニューと、左上のアイコンを実装している。                                                                                      |
-| 📄src/components/Menu/MenuItems.tsx     | ここで、メニュー ID とコンポーネント・メニュー名・アイコンを紐付けている。                                                                          |
-| 📄src/components/SpinLogo/index.ts      | SpinLogo コンポーネントを`export default`している。                                                                                                 |
-| 📄src/components/SpinLogo/logo.svg      | ロゴ                                                                                                                                                |
-| 📄src/components/SpinLogo/SpinLogo.scss | SpinLogo コンポーネント用のスタイルシート                                                                                                           |
-| 📄src/components/SpinLogo/SpinLogo.tsx  | SpinLogo コンポーネントを実装している。                                                                                                             |
-| 📄src/redux/hooks.ts                    | redux-toolkit 製の`useDispatch`と`useSelector`を生成しているだけのファイル。                                                                        |
-| 📄src/redux/store.ts                    | `store`を定義しているファイル。                                                                                                                     |
-| 📄src/redux/state/app.ts                | アプリケーションの状態を保持する State                                                                                                              |
-| 📄src/redux/state/count.ts              | Count の状態を保持する State                                                                                                                        |
-| 📄src/redux/state/spinLogo.ts           | SpinLogo の状態を保持する State                                                                                                                     |
-| 📄src/redux/thunk/fetchCounter.ts       | カウントの非同期処理の Thunk を定義している。                                                                                                       |
+| ファイル・ディレクトリ                     | 説明                                                                                       |
+| :----------------------------------------- | :----------------------------------------------------------------------------------------- |
+| 📁.github                                  | GitHub の設定用ファイル                                                                    |
+| 📁.github/ISSUE_TEMPLATE                   | GitHub の Issue のテンプレート                                                             |
+| 📁.github/ISSUE_TEMPLATE/アイデアや要望.md | アイデアや要望用の Issue のテンプレート                                                    |
+| 📁.github/ISSUE_TEMPLATE/バグ報告.md       | バグ報告用の Issue のテンプレート                                                          |
+| 📁.github/workflows/nodejs.yml             | このリポジトリの GitHub Pages を自動生成するためのワークフロー                             |
+| 📁.github/PULL_REQUEST_TEMPLATE.md         | プルリクエスト用の Issue のテンプレート                                                    |
+| 📄.eslintrc.json                           | ESLint の設定ファイル                                                                      |
+| 📁.git                                     | git の管理用ファイル(自動生成)                                                             |
+| 📄.gitignore                               | git で無視するファイル・ディレクトリの設定                                                 |
+| 📄.prettierrc                              | Prettier の設定ファイル                                                                    |
+| 📄yarn.json                                | node_modules のパッケージとそのバージョンの管理用ファイル(自動生成)                        |
+| 📄package.json                             | node_modules のパッケージの管理やアプリケーションの設定などの設定ファイル                  |
+| 📄README.md                                | このファイル                                                                               |
+| 📄tsconfig.json                            | TypeScript の設定ファイル                                                                  |
+| 📁.vscode                                  | VSCode の設定ファイルを保存するディレクトリ                                                |
+| 📄.vscode/settings.json                    | VSCode の設定ファイル                                                                      |
+| 📄.vscode/launch.json                      | VSCode のデバッグの設定ファイル(未作成)                                                    |
+| 📁build                                    | `yarn build`を実行すると作成される、ビルドで生成されたファイルが保存されるディレクトリ。   |
+| 📁node_modules                             | `yarn install`を実行すると作成される、モジュール(ライブラリ)が保存されているディレクトリ。 |
+| 📁public                                   | 公開用ディレクトリ(ビルド用)                                                               |
+| 📄public/favicon.ico                       | ファビコン                                                                                 |
+| 📄public/index.html                        | index.html                                                                                 |
+| 📄public/logo192.png                       | ロゴ(高解像度ファビコン用)                                                                 |
+| 📄public/logo512.png                       | ロゴ(高解像度ファビコン用)                                                                 |
+| 📄public/manifest.json                     | WEB サイト設定ファイル                                                                     |
+| 📄public/robots.txt                        | クローラ・ボット用設定ファイル                                                             |
+| 📁src                                      | ソースディレクトリ                                                                         |
+| 📄src/App.test.tsx                         | アプリケーションのルートとなるコンポーネントのテストコード(適当)                           |
+| 📄src/App.tsx                              | アプリケーションのルートとなるコンポーネント                                               |
+| 📄src/index.tsx                            | App を呼び出している。<br />これが public/index.html の`<div id="root" />`へ描画している。 |
+| 📄src/react-app-env.d.ts                   | react-app の型定義を参照することを宣言しているらしい(Create React App 由来)                |
+| 📄src/setupTests.ts                        | テストの実行に必要なライブラリをインポートしているらしい(Create React App 由来)            |
+| 📄src/components/Count/Count.tsx           | Count コンポーネントを実装している。                                                       |
+| 📄src/components/Count/index.ts            | Count コンポーネントを`export default`している。                                           |
+| 📄src/components/Menu/index.ts             | Menu コンポーネントを`export default`している。                                            |
+| 📄src/components/Menu/Menu.tsx             | 左側にニョキッと出るメニューと、左上のアイコンを実装している。                             |
+| 📄src/components/Menu/MenuItems.tsx        | ここで、メニュー ID とコンポーネント・メニュー名・アイコンを紐付けている。                 |
+| 📄src/components/SpinLogo/index.ts         | SpinLogo コンポーネントを`export default`している。                                        |
+| 📄src/components/SpinLogo/logo.svg         | ロゴ                                                                                       |
+| 📄src/components/SpinLogo/SpinLogo.tsx     | SpinLogo コンポーネントを実装している。                                                    |
+| 📄src/redux/hooks.ts                       | redux-toolkit 製の`useDispatch`と`useSelector`を生成しているだけのファイル。               |
+| 📄src/redux/store.ts                       | `store`を定義しているファイル。                                                            |
+| 📄src/redux/state/app.ts                   | アプリケーションの状態を保持する State                                                     |
+| 📄src/redux/state/count.ts                 | Count の状態を保持する State                                                               |
+| 📄src/redux/state/spinLogo.ts              | SpinLogo の状態を保持する State                                                            |
+| 📄src/redux/thunk/fetchCounter.ts          | カウントの非同期処理の Thunk を定義している。                                              |
