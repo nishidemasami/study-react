@@ -1,6 +1,8 @@
+import { Toolbar } from "@material-ui/core";
 import React from "react";
 import { shallowEqual } from "react-redux";
 import styled from "styled-components";
+import AppBar from "./components/AppBar";
 import Menu from "./components/Menu";
 import MenuItems from "./components/Menu/MenuItems";
 import { useSelector } from "./redux/hooks";
@@ -17,13 +19,10 @@ const AppDiv = styled.div`
 	}
 `;
 
-/** メインのheader */
-const MainHeader = styled.header`
-	background-color: #e6eeff;
+/** メインコンテンツ */
+const MainContents = styled.div`
 	position: absolute;
-	width: 100vw;
-	height: 100vh;
-	height: -webkit-fill-available;
+	width: 100%;
 	align-items: center;
 	justify-content: center;
 	font-size: calc(10px + 2vmin);
@@ -33,21 +32,14 @@ const MainHeader = styled.header`
 const App: React.VFC = () => {
 	const { appState } = useSelector((state: RootState) => state, shallowEqual);
 	return (
-		<>
-			<React.StrictMode>
-				<AppDiv>
-					<MainHeader>
-						「
-						<a href="https://github.com/nishidemasami/study-react">
-							https://github.com/nishidemasami/study-react
-						</a>
-						」を参照して下さい
-						{MenuItems[appState.component].component}
-					</MainHeader>
-				</AppDiv>
-			</React.StrictMode>
+		<React.StrictMode>
+			<AppBar />
+			<AppDiv>
+				<Toolbar />
+				<MainContents>{MenuItems[appState.component].component}</MainContents>
+			</AppDiv>
 			<Menu />
-		</>
+		</React.StrictMode>
 	);
 };
 
