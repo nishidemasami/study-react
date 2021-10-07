@@ -1,6 +1,7 @@
-import { Autorenew, ExposurePlus1 } from "@material-ui/icons";
+import { Autorenew, ExposurePlus1, Help } from "@material-ui/icons";
 import { menuComponents } from "../../redux/state/app";
 import Count from "../Count";
+import HelpPage from "../HelpPage";
 import SpinLogo from "../SpinLogo";
 
 /**
@@ -22,6 +23,11 @@ const MenuItems: {
 		component: <SpinLogo />,
 		name: "ロゴまわし",
 		icon: <Autorenew />,
+	},
+	helpPage: {
+		component: <HelpPage />,
+		name: "ヘルプ",
+		icon: <Help />,
 	},
 };
 

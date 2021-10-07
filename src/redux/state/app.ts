@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-/** メニュー一覧タイプ */
-export type menuComponents = "count" | "spinLogo";
-
 /** メニューリスト */
-export const menuList: menuComponents[] = ["count", "spinLogo"];
+export const menuList = ["count", "spinLogo", "helpPage"] as const;
+
+/** メニュー一覧タイプ */
+export type menuComponents = typeof menuList[number];
 
 // Define a type for the slice state
 interface AppState {
@@ -17,7 +17,7 @@ interface AppState {
 // Define the initial state using that type
 const initialState: AppState = {
 	openMenu: false,
-	component: "count",
+	component: menuList[0],
 };
 
 const appSlice = createSlice({
