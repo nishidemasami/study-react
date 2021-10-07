@@ -13,7 +13,7 @@ import fetchLastCounter from "../../redux/thunk/fetchCounter";
 
 /** 良い幅のスライダー */
 const GoodWidthSlider = styled(Slider)`
-	max-width: 40vmin;
+	max-width: 50%;
 `;
 
 const Count: React.VFC = () => {
