@@ -1,7 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 /** メニューリスト */
-export const menuList = ["count", "spinLogo", "helpPage"] as const;
+export const menuList = [
+	"welcomePage",
+	"count",
+	"spinLogo",
+	"helpPage",
+] as const;
 
 /** メニュー一覧タイプ */
 export type menuComponents = typeof menuList[number];

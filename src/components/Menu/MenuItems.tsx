@@ -1,8 +1,9 @@
-import { Autorenew, ExposurePlus1, Help } from "@material-ui/icons";
+import { Autorenew, Help, Home, PlusOne } from "@mui/icons-material";
 import { menuComponents } from "../../redux/state/app";
 import Count from "../Count";
 import HelpPage from "../HelpPage";
 import SpinLogo from "../SpinLogo";
+import WelcomePage from "../WelcomePage";
 
 /**
  * メニューアイテム一覧
@@ -17,7 +18,7 @@ const MenuItems: {
 	count: {
 		component: <Count />,
 		name: "カウントアップ",
-		icon: <ExposurePlus1 />,
+		icon: <PlusOne />,
 	},
 	spinLogo: {
 		component: <SpinLogo />,
@@ -28,6 +29,11 @@ const MenuItems: {
 		component: <HelpPage />,
 		name: "ヘルプ",
 		icon: <Help />,
+	},
+	welcomePage: {
+		component: <WelcomePage />,
+		name: "ようこそ",
+		icon: <Home />,
 	},
 };
 
