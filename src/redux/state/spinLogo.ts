@@ -4,11 +4,14 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface SpinLogoState {
 	/** ロゴ回転フラグ */
 	spin: boolean;
+	/** ロゴの色 */
+	logoColor: string;
 }
 
 // Define the initial state using that type
 const initialState: SpinLogoState = {
 	spin: false,
+	logoColor: "#61DAFB",
 };
 const spinLogoSlice = createSlice({
 	name: "spinLogo",
@@ -16,6 +19,9 @@ const spinLogoSlice = createSlice({
 	reducers: {
 		setSpinLogo: (state, action: PayloadAction<typeof state.spin>) => {
 			state.spin = action.payload;
+		},
+		setLogoColor: (state, action: PayloadAction<typeof state.logoColor>) => {
+			state.logoColor = action.payload;
 		},
 	},
 });
