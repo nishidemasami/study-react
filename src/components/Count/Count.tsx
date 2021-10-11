@@ -1,9 +1,4 @@
-import {
-	Button,
-	CircularProgress,
-	Slider,
-	Typography,
-} from "@material-ui/core";
+import { Button, CircularProgress, Slider, Typography } from "@mui/material";
 import { shallowEqual } from "react-redux";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "../../redux/hooks";
@@ -51,15 +46,17 @@ const Count: React.VFC = () => {
 				disabled={countState.progress}
 				max={100}
 				min={0}
-				onChange={(e, newValue: number | number[]) =>
-					dispatch(actions.setShowingPercent(newValue as number))
-				}
+				onChange={(e, newValue) => {
+					if (typeof newValue === "number") {
+						dispatch(actions.setShowingPercent(newValue));
+					}
+				}}
 				value={countState.percent}
 				valueLabelDisplay="off"
 			/>
 			<p>
 				<Button
-					color="default"
+					color="info"
 					disabled={countState.progress}
 					onClick={() => {
 						dispatch(

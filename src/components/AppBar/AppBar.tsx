@@ -1,11 +1,5 @@
-import {
-	AppBar,
-	Box,
-	IconButton,
-	Toolbar,
-	Typography,
-} from "@material-ui/core";
-import { Menu } from "@material-ui/icons";
+import { Menu } from "@mui/icons-material";
+import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import { shallowEqual } from "react-redux";
 import { useDispatch, useSelector } from "../../redux/hooks";
 import { actions } from "../../redux/state/app";
@@ -25,15 +19,11 @@ const AppBarComponent: React.VFC = () => {
 						edge="start"
 						onClick={() => dispatch(actions.setOpenMenu(!appState.openMenu))}
 						size="medium"
-						// sx={{ mr: 2 }}
+						sx={{ mr: 2 }}
 					>
 						<Menu />
 					</IconButton>
-					<Typography
-						component="div"
-						// sx={{ flexGrow: 1 }}
-						variant="h6"
-					>
+					<Typography component="div" sx={{ flexGrow: 1 }} variant="h6">
 						{MenuItems[appState.component].name}
 					</Typography>
 				</Toolbar>

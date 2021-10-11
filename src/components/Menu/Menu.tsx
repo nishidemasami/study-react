@@ -1,3 +1,4 @@
+import { Cancel } from "@mui/icons-material";
 import {
 	Divider,
 	Drawer,
@@ -5,8 +6,7 @@ import {
 	ListItem,
 	ListItemIcon,
 	ListItemText,
-} from "@material-ui/core";
-import { Cancel } from "@material-ui/icons";
+} from "@mui/material";
 import { shallowEqual } from "react-redux";
 import { useDispatch, useSelector } from "../../redux/hooks";
 import { actions, menuList } from "../../redux/state/app";

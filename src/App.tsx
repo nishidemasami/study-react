@@ -1,4 +1,4 @@
-import { Toolbar } from "@material-ui/core";
+import { Toolbar } from "@mui/material";
 import React from "react";
 import { shallowEqual } from "react-redux";
 import styled from "styled-components";
