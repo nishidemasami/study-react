@@ -74,6 +74,7 @@
 			"error",
 			{ "extensions": [".js", ".jsx", ".ts", ".tsx"] }
 		],
+		"import/prefer-default-export": "off",
 
 		// for good development experience
 		"no-warning-comments": "warn",
