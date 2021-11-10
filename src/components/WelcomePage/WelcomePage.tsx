@@ -1,16 +1,14 @@
-import { Typography } from "@mui/material";
-import styled from "styled-components";
+import {
+	Box,
+	Button,
+	CardActions,
+	CardContent,
+	Typography,
+} from "@mui/material";
 import { useDispatch } from "../../redux/hooks";
-import { actions } from "../../redux/state/app";
-
-const DivLikeA = styled.div`
-	cursor: pointer;
-	text-decoration: underline;
-`;
-
-const DividedDiv = styled.div`
-	border-top: 1px solid rgba(0, 0, 0, 0.12);
-`;
+import { actions, menuList } from "../../redux/state/app";
+import { DividedDiv, SitemapCard } from "../Common/Styled";
+import MenuItems from "../Menu/MenuItems";
 
 const WelcomePage: React.VFC = () => {
 	const dispatch = useDispatch();
@@ -24,30 +22,47 @@ const WelcomePage: React.VFC = () => {
 			</DividedDiv>
 			<DividedDiv>
 				<Typography>機能一覧</Typography>
-				<DivLikeA
-					onClick={() => dispatch(actions.setComponent("count"))}
-					onKeyPress={() => dispatch(actions.setComponent("count"))}
-					role="button"
-					tabIndex={0}
-				>
-					<Typography>カウント</Typography>
-				</DivLikeA>
-				<DivLikeA
-					onClick={() => dispatch(actions.setComponent("spinLogo"))}
-					onKeyPress={() => dispatch(actions.setComponent("spinLogo"))}
-					role="button"
-					tabIndex={0}
-				>
-					<Typography>ロゴまわし</Typography>
-				</DivLikeA>
-				<DivLikeA
-					onClick={() => dispatch(actions.setComponent("helpPage"))}
-					onKeyPress={() => dispatch(actions.setComponent("helpPage"))}
-					role="button"
-					tabIndex={0}
-				>
-					<Typography>ヘルプ</Typography>
-				</DivLikeA>
+
+				<Box sx={{ flexGrow: 1, overflow: "hidden", px: 3 }}>
+					{menuList
+						.map((menu) => ({ menu, site: MenuItems[menu] }))
+						.map(({ menu, site }) => (
+							<SitemapCard
+								key={site.name}
+								sx={{
+									minWidth: 275,
+									maxWidth: "75%",
+									flexGrow: 1,
+									overflow: "hidden",
+									px: 3,
+								}}
+							>
+								<CardContent>
+									<Typography
+										color="text.secondary"
+										gutterBottom
+										sx={{ fontSize: 14 }}
+									>
+										ページ
+									</Typography>
+									<Typography component="div" variant="h5">
+										{site.icon}
+										{site.name}
+									</Typography>
+									<Typography variant="body2">{site.description}</Typography>
+								</CardContent>
+								<CardActions>
+									<Button
+										onClick={() => dispatch(actions.setComponent(menu))}
+										onKeyPress={() => dispatch(actions.setComponent(menu))}
+										size="small"
+									>
+										移動
+									</Button>
+								</CardActions>
+							</SitemapCard>
+						))}
+				</Box>
 			</DividedDiv>
 			<DividedDiv>
 				<Typography>

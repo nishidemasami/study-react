@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import appReducer from "./state/app";
+import bitcoinReducer from "./state/bitcoin";
 import countReducer from "./state/count";
 import spinLogoReducer from "./state/spinLogo";
 
@@ -8,6 +9,7 @@ export const store = configureStore({
 		countState: countReducer,
 		appState: appReducer,
 		spinLogoState: spinLogoReducer,
+		bitcoinState: bitcoinReducer,
 	},
 });
 

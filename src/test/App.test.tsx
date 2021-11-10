@@ -2,8 +2,8 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import { Provider } from "react-redux";
-import App from "./App";
-import { store } from "./redux/store";
+import App from "../components/App/App";
+import { store } from "../redux/store";
 
 test("renders learn react link", async () => {
 	render(
@@ -11,7 +11,7 @@ test("renders learn react link", async () => {
 			<App />
 		</Provider>
 	);
-	const elements = screen.getAllByText(/ようこそ/i);
+	const elements = screen.getAllByText(/このページはReact練習用ページです/i);
 	elements.forEach((element) => {
 		expect(element).toBeInTheDocument();
 	});

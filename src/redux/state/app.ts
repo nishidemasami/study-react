@@ -5,6 +5,9 @@ export const menuList = [
 	"welcomePage",
 	"count",
 	"spinLogo",
+	"bitcoin",
+	"configPage",
+	"siteMap",
 	"helpPage",
 ] as const;
 
@@ -12,17 +15,17 @@ export const menuList = [
 export type menuComponents = typeof menuList[number];
 
 // Define a type for the slice state
-interface AppState {
+export interface AppState {
 	/** メニューを表示するかどうか */
 	openMenu: boolean;
 	/** 表示するコンポーネント */
-	component: menuComponents;
+	component?: menuComponents;
 }
 
 // Define the initial state using that type
 const initialState: AppState = {
 	openMenu: false,
-	component: menuList[0],
+	component: undefined,
 };
 
 const appSlice = createSlice({
@@ -34,6 +37,19 @@ const appSlice = createSlice({
 		},
 		setComponent: (state, action: PayloadAction<typeof state.component>) => {
 			state.component = action.payload;
+		},
+		parseJSON: (state, action: PayloadAction<string>) => {
+			[state.component] = menuList;
+			JSON.parse(action.payload, (key, value) => {
+				if (key === "openMenu" && typeof value === "boolean") {
+					state.openMenu = value;
+				} else if (
+					key === "component" &&
+					menuList.find((menu) => menu === value)
+				) {
+					state.component = value;
+				}
+			});
 		},
 	},
 });

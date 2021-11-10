@@ -1,7 +1,8 @@
+import { keyframes } from "@emotion/react";
+import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import React from "react";
 import { shallowEqual } from "react-redux";
-import styled from "styled-components";
 import { useDispatch, useSelector } from "../../redux/hooks";
 import { actions } from "../../redux/state/spinLogo";
 import { RootState } from "../../redux/store";
@@ -14,25 +15,26 @@ type RollingLogoProps = {
 	logoColor: string;
 };
 
+/** まわるLogoのkeyframes */
+const RollingLogoKeyframes = keyframes`
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+`;
+
 /** まわるLogo */
 const RollingLogo = styled(Logo)<RollingLogoProps>`
 	height: 40vmin;
 	pointer-events: none;
 
 	&[data-spinning="true"] {
-		animation: App-logo-spin infinite 1s linear;
+		animation: ${RollingLogoKeyframes} infinite 1s linear;
 	}
 
 	fill: ${(props) => props.logoColor};
-
-	@keyframes App-logo-spin {
-		from {
-			transform: rotate(0deg);
-		}
-		to {
-			transform: rotate(360deg);
-		}
-	}
 `;
 
 const SpinLogo: React.VFC = () => {

@@ -1,8 +1,8 @@
-import { Menu } from "@mui/icons-material";
+import { Home, Menu } from "@mui/icons-material";
 import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import { shallowEqual } from "react-redux";
 import { useDispatch, useSelector } from "../../redux/hooks";
-import { actions } from "../../redux/state/app";
+import { actions, menuList } from "../../redux/state/app";
 import { RootState } from "../../redux/store";
 import MenuItems from "../Menu/MenuItems";
 
@@ -24,8 +24,18 @@ const AppBarComponent: React.VFC = () => {
 						<Menu />
 					</IconButton>
 					<Typography component="div" sx={{ flexGrow: 1 }} variant="h6">
-						{MenuItems[appState.component].name}
+						{appState.component && MenuItems[appState.component].name}
 					</Typography>
+					<IconButton
+						aria-label="menu"
+						color="inherit"
+						edge="start"
+						onClick={() => dispatch(actions.setComponent(menuList[0]))}
+						size="medium"
+						sx={{ mr: 2 }}
+					>
+						<Home />
+					</IconButton>
 				</Toolbar>
 			</AppBar>
 		</Box>

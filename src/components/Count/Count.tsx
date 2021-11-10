@@ -1,6 +1,6 @@
+import styled from "@emotion/styled";
 import { Button, CircularProgress, Slider, Typography } from "@mui/material";
 import { shallowEqual } from "react-redux";
-import styled from "styled-components";
 import { useDispatch, useSelector } from "../../redux/hooks";
 import { actions } from "../../redux/state/count";
 import { RootState } from "../../redux/store";

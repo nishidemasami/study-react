@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import fetchLastCounter from "../thunk/fetchCounter";
 
 // Define a type for the slice state
-interface CounterState {
+export interface CounterState {
 	/** 表示するメッセージ */
 	message: string;
 	/** プログレスフラグ */
@@ -34,6 +34,9 @@ const countSlice = createSlice({
 		setMessasge: (state, action: PayloadAction<string>) => {
 			state.message = action.payload;
 		},
+		setCount: (state, action: PayloadAction<typeof state.count>) => {
+			state.count = action.payload;
+		},
 		increment: (state) => {
 			state.count += 1;
 		},
@@ -42,6 +45,15 @@ const countSlice = createSlice({
 		},
 		incrementByAmount: (state, action: PayloadAction<number>) => {
 			state.count += action.payload;
+		},
+		parseJSON: (state, action: PayloadAction<string>) => {
+			JSON.parse(action.payload, (key, value) => {
+				if (key === "count" && typeof value === "number") {
+					state.count = value;
+				} else if (key === "percent" && typeof value === "number") {
+					state.percent = value;
+				}
+			});
 		},
 	},
 	extraReducers: (builder) => {

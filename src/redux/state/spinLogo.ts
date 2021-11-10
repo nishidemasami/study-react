@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 // Define a type for the slice state
-interface SpinLogoState {
+export interface SpinLogoState {
 	/** ロゴ回転フラグ */
 	spin: boolean;
 	/** ロゴの色 */
@@ -22,6 +22,15 @@ const spinLogoSlice = createSlice({
 		},
 		setLogoColor: (state, action: PayloadAction<typeof state.logoColor>) => {
 			state.logoColor = action.payload;
+		},
+		parseJSON: (state, action: PayloadAction<string>) => {
+			JSON.parse(action.payload, (key, value) => {
+				if (key === "logoColor" && typeof value === "string") {
+					state.logoColor = value;
+				} else if (key === "spin" && typeof value === "boolean") {
+					state.spin = value;
+				}
+			});
 		},
 	},
 });
