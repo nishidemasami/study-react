@@ -1,1 +1,3 @@
+/*! MIT License (c) 2021, Peter Wuille (https://github.com/sipa/bech32) */
+
 /*! micro-base58 - MIT License (c) 2021, Paul Miller (https://paulmillr.com) */
