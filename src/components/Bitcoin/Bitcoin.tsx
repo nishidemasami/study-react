@@ -22,6 +22,8 @@ const Bitcoin: React.VFC = () => {
 			</Button>
 			<p>ビットコインアドレス(BASE58(P2PKH)形式)：</p>
 			<WordWrapP>{bitcoinState.bitcoinAddress}</WordWrapP>
+			{/* <p>ビットコインアドレス(BECH32(P2WPKH)形式)：</p>
+			<WordWrapP>{bitcoinState.bitcoinAddressBECH32}</WordWrapP> */}
 			<p>秘密鍵(WIF形式)：</p>
 			<WordWrapP>{bitcoinState.wif}</WordWrapP>
 		</>

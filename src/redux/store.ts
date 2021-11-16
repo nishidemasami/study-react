@@ -2,14 +2,18 @@ import { configureStore } from "@reduxjs/toolkit";
 import appReducer from "./state/app";
 import bitcoinReducer from "./state/bitcoin";
 import countReducer from "./state/count";
+import cubeReducer from "./state/cube";
 import spinLogoReducer from "./state/spinLogo";
+import whiteNoiseReducer from "./state/whiteNoise";
 
 export const store = configureStore({
 	reducer: {
-		countState: countReducer,
 		appState: appReducer,
-		spinLogoState: spinLogoReducer,
 		bitcoinState: bitcoinReducer,
+		countState: countReducer,
+		cubeState: cubeReducer,
+		spinLogoState: spinLogoReducer,
+		whiteNoiseState: whiteNoiseReducer,
 	},
 });
 

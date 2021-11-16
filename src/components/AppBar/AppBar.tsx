@@ -10,7 +10,7 @@ const AppBarComponent: React.VFC = () => {
 	const { appState } = useSelector((state: RootState) => state, shallowEqual);
 	const dispatch = useDispatch();
 	return (
-		<Box sx={{ flexGrow: 1 }}>
+		<Box sx={{ flexGrow: 0 }}>
 			<AppBar position="fixed">
 				<Toolbar>
 					<IconButton

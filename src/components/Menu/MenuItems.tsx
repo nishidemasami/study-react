@@ -1,4 +1,5 @@
 import {
+	Audiotrack,
 	Autorenew,
 	Help,
 	Home,
@@ -15,6 +16,7 @@ import HelpPage from "../HelpPage";
 import SiteMap from "../SiteMap";
 import SpinLogo from "../SpinLogo";
 import WelcomePage from "../WelcomePage";
+import WhiteNoise from "../WhiteNoise";
 
 /**
  * メニューアイテム一覧
@@ -38,6 +40,12 @@ const MenuItems: {
 		name: "ロゴまわし",
 		icon: <Autorenew />,
 		description: "Reactのロゴをまわすページです。",
+	},
+	whiteNoise: {
+		component: <WhiteNoise />,
+		name: "ホワイトノイズ再生",
+		icon: <Audiotrack />,
+		description: "ホワイトノイズを再生します。",
 	},
 	helpPage: {
 		component: <HelpPage />,

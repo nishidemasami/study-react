@@ -11,6 +11,7 @@ import {
 import { SketchPicker } from "react-color";
 import { shallowEqual } from "react-redux";
 import { useDispatch, useSelector } from "../../redux/hooks";
+import { actions as appActions } from "../../redux/state/app";
 import { actions as countActions } from "../../redux/state/count";
 import { actions as spinLogoActions } from "../../redux/state/spinLogo";
 import { RootState } from "../../redux/store";
@@ -41,10 +42,42 @@ const ConfigPage: React.VFC = () => {
 	const dispatch = useDispatch();
 
 	const { showColorPicker, setShowColorPicker } = useShowColorPicker();
+	const {
+		showColorPicker: showAppStateBackgroundColorPicker,
+		setShowColorPicker: setShowAppStateBackgroundColorColorPicker,
+	} = useShowColorPicker();
 
 	return (
 		<>
 			<Typography>設定</Typography>
+			<DividedDiv>
+				<Typography>全体</Typography>
+				<GoodMarginTextField
+					error={!checkHTMLColor(appState.backgroundColor)}
+					label="背景色"
+					onChange={(element) =>
+						dispatch(appActions.setBackgroundColor(element.currentTarget.value))
+					}
+					onClick={() => setShowAppStateBackgroundColorColorPicker(true)}
+					required
+					type="text"
+					value={appState.backgroundColor}
+				/>
+				<Dialog
+					PaperComponent={NoMarginPaper}
+					onClose={() => {
+						setShowAppStateBackgroundColorColorPicker(false);
+					}}
+					open={showAppStateBackgroundColorPicker}
+				>
+					<SketchPicker
+						color={appState.backgroundColor}
+						onChange={(color) =>
+							dispatch(appActions.setBackgroundColor(color.hex))
+						}
+					/>
+				</Dialog>
+			</DividedDiv>
 			<DividedDiv>
 				<Typography>ロゴまわし</Typography>
 				<GoodMarginTextField

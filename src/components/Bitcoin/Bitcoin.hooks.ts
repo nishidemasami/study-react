@@ -16,13 +16,13 @@ export const useBitcoinAddress = (): (() => void) => {
 		const msg = randomBytes(32);
 
 		// generate privKey
-		let privKey;
+		let privKey: Uint8Array;
 		do {
 			privKey = randomBytes(32);
 		} while (!secp256k1.privateKeyVerify(privKey));
 
 		// get the public key in a compressed format
-		const pubKey = secp256k1.publicKeyCreate(privKey, false);
+		const pubKey: Uint8Array = secp256k1.publicKeyCreate(privKey, false);
 
 		// sign the message
 		const sigObj = secp256k1.ecdsaSign(msg, privKey);
@@ -31,6 +31,9 @@ export const useBitcoinAddress = (): (() => void) => {
 		if (secp256k1.ecdsaVerify(sigObj.signature, msg, pubKey)) {
 			dispatch(actions.setPublicKey(Uint8ArrayToNumberArray(pubKey)));
 			dispatch(actions.setBitcoinAddress(genBitcoinAddress(pubKey)));
+			// dispatch(
+			// 	actions.setBitcoinAddressBECH32(genBitcoinAddressBECH32(pubKey))
+			// );
 			dispatch(actions.setWif(genWif(privKey)));
 		} else {
 			dispatch(actions.setPublicKey([]));

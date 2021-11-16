@@ -41,15 +41,17 @@ const SiteMap: React.VFC = () => {
 							</Typography>
 							<Typography variant="body2">{site.description}</Typography>
 						</CardContent>
-						<CardActions>
-							<Button
-								onClick={() => dispatch(actions.setComponent(menu))}
-								onKeyPress={() => dispatch(actions.setComponent(menu))}
-								size="small"
-							>
-								移動
-							</Button>
-						</CardActions>
+						{menu === "siteMap" ? null : (
+							<CardActions>
+								<Button
+									onClick={() => dispatch(actions.setComponent(menu))}
+									onKeyPress={() => dispatch(actions.setComponent(menu))}
+									size="small"
+								>
+									移動
+								</Button>
+							</CardActions>
+						)}
 					</SitemapCard>
 				))}
 		</Box>

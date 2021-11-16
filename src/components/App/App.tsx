@@ -13,6 +13,9 @@ import MenuItems from "../Menu/MenuItems";
 /** アプリケーションのdiv */
 const AppDiv = styled.div`
 	text-align: center;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
 	p {
 		margin: 2px;
 	}
@@ -21,14 +24,29 @@ const AppDiv = styled.div`
 	}
 `;
 
+/** メインコンテンツのプロパティ */
+type MainContentsProps = {
+	/** メインコンテンツの背景色 */
+	backgroundColor: string;
+};
+
 /** メインコンテンツ */
-const MainContents = styled.div`
-	position: absolute;
+const MainContents = styled.div<MainContentsProps>`
 	width: 100%;
+	height: 100%;
 	align-items: center;
 	justify-content: center;
 	font-size: calc(10px + 2vmin);
 	color: black;
+	background-color: ${(props) => props.backgroundColor};
+	flex-grow: 1;
+`;
+
+/** Toolbar */
+const MinToolbar = styled(Toolbar)`
+	flex-grow: 0;
+	padding: 0;
+	margin: 0;
 `;
 
 const App: React.VFC = () => {
@@ -50,8 +68,8 @@ const App: React.VFC = () => {
 		<React.StrictMode>
 			<AppBar />
 			<AppDiv>
-				<Toolbar />
-				<MainContents>
+				<MinToolbar />
+				<MainContents backgroundColor={appState.backgroundColor}>
 					{appState.component && MenuItems[appState.component].component}
 				</MainContents>
 			</AppDiv>

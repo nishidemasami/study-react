@@ -5,6 +5,7 @@ export const menuList = [
 	"welcomePage",
 	"count",
 	"spinLogo",
+	"whiteNoise",
 	"bitcoin",
 	"configPage",
 	"siteMap",
@@ -20,12 +21,15 @@ export interface AppState {
 	openMenu: boolean;
 	/** 表示するコンポーネント */
 	component?: menuComponents;
+	/** メインコンテンツの背景色 */
+	backgroundColor: string;
 }
 
 // Define the initial state using that type
 const initialState: AppState = {
 	openMenu: false,
 	component: undefined,
+	backgroundColor: "#e6eeff",
 };
 
 const appSlice = createSlice({
@@ -37,6 +41,12 @@ const appSlice = createSlice({
 		},
 		setComponent: (state, action: PayloadAction<typeof state.component>) => {
 			state.component = action.payload;
+		},
+		setBackgroundColor: (
+			state,
+			action: PayloadAction<typeof state.backgroundColor>
+		) => {
+			state.backgroundColor = action.payload;
 		},
 		parseJSON: (state, action: PayloadAction<string>) => {
 			[state.component] = menuList;

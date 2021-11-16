@@ -18,6 +18,11 @@ export interface BitcoinState {
 	 *  */
 	bitcoinAddress: string;
 	/**
+	 * ビットコインアドレス
+	 * BECH32(P2WPKH)形式
+	 *  */
+	bitcoinAddressBECH32: string;
+	/**
 	 * 秘密鍵
 	 * WIF形式
 	 *  */
@@ -29,6 +34,7 @@ const initialState: BitcoinState = {
 	publicKey: [],
 	secretKey: [],
 	bitcoinAddress: "",
+	bitcoinAddressBECH32: "",
 	wif: "",
 };
 const BitcoinSlice = createSlice({
@@ -49,6 +55,12 @@ const BitcoinSlice = createSlice({
 			action: PayloadAction<typeof state.bitcoinAddress>
 		) => {
 			state.bitcoinAddress = action.payload;
+		},
+		setBitcoinAddressBECH32: (
+			state,
+			action: PayloadAction<typeof state.bitcoinAddressBECH32>
+		) => {
+			state.bitcoinAddressBECH32 = action.payload;
 		},
 	},
 });
