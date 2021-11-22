@@ -9,6 +9,9 @@ import { saveLocalStorage } from "../../redux/thunk/localStorage";
 import AppBar from "../AppBar";
 import Menu from "../Menu";
 import MenuItems from "../Menu/MenuItems";
+import { AppContextProps, useAppContext } from "./App.hooks";
+
+export const AppContext = React.createContext({} as AppContextProps);
 
 /** アプリケーションのdiv */
 const AppDiv = styled.div`
@@ -64,16 +67,20 @@ const App: React.VFC = () => {
 		dispatch(saveLocalStorage({ appState, countState, spinLogoState }));
 	}, [dispatch, appState, countState, spinLogoState]);
 
+	const appContext = useAppContext();
+
 	return (
 		<React.StrictMode>
-			<AppBar />
-			<AppDiv>
-				<MinToolbar />
-				<MainContents backgroundColor={appState.backgroundColor}>
-					{appState.component && MenuItems[appState.component].component}
-				</MainContents>
-			</AppDiv>
-			<Menu />
+			<AppContext.Provider value={appContext}>
+				<AppBar />
+				<AppDiv>
+					<MinToolbar />
+					<MainContents backgroundColor={appState.backgroundColor}>
+						{appState.component && MenuItems[appState.component].component}
+					</MainContents>
+				</AppDiv>
+				<Menu />
+			</AppContext.Provider>
 		</React.StrictMode>
 	);
 };

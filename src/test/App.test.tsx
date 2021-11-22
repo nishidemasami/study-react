@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import { Provider } from "react-redux";
-import App from "../components/App/App";
+import App from "../components/App";
 import { store } from "../redux/store";
 
 test("renders learn react link", async () => {

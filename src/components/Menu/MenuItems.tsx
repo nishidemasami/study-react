@@ -43,9 +43,9 @@ const MenuItems: {
 	},
 	whiteNoise: {
 		component: <WhiteNoise />,
-		name: "ホワイトノイズ再生",
+		name: "音の再生",
 		icon: <Audiotrack />,
-		description: "ホワイトノイズを再生します。",
+		description: "サイン波やホワイトノイズなどを再生します。",
 	},
 	helpPage: {
 		component: <HelpPage />,

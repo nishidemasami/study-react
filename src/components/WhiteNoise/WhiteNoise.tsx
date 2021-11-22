@@ -1,11 +1,21 @@
 import styled from "@emotion/styled";
 import { VolumeDown, VolumeUp } from "@mui/icons-material";
-import { Button, Slider } from "@mui/material";
+import {
+	Button,
+	FormControl,
+	FormControlLabel,
+	FormLabel,
+	Radio,
+	RadioGroup,
+	Slider,
+} from "@mui/material";
 import React from "react";
 import { shallowEqual } from "react-redux";
 import { useDispatch, useSelector } from "../../redux/hooks";
-import { actions } from "../../redux/state/whiteNoise";
+import { actions, Wave, Waves } from "../../redux/state/whiteNoise";
 import { RootState } from "../../redux/store";
+import { AppContext } from "../App/App";
+import { useOnClickToStartAndStop } from "./hook";
 
 /** 良い幅のスライダー */
 const GoodWidthSlider = styled(Slider)`
@@ -19,87 +29,27 @@ const WhiteNoise: React.VFC = () => {
 	);
 	const dispatch = useDispatch();
 
-	const [audioContext, setAudioContext] = React.useState<AudioContext>();
-	const [gainNode, setGainNode] = React.useState<GainNode>();
-	const [source, setSource] = React.useState<AudioBufferSourceNode>();
+	const { audioContext } = React.useContext(AppContext);
 
-	React.useEffect(() => {
-		const newAudioContext = new (window.AudioContext ||
-			window.webkitAudioContext)();
-		setAudioContext(newAudioContext);
-		const newGainNode = newAudioContext.createGain();
-		setGainNode(newGainNode);
-
-		return () => {
-			dispatch(actions.setPlaying(false));
-			if (source) {
-				source.stop();
-				source.buffer = null;
-			}
-			if (newAudioContext) {
-				newAudioContext.close();
-			}
-		};
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
-	const onClickToStartAndStop = React.useCallback(() => {
-		if (audioContext && gainNode) {
-			if (whiteNoiseState.playing) {
-				// 停止
-				if (source) {
-					source.stop();
-					source.buffer = null; // メモリリーク防止
-				}
-			} else {
-				// 再生
-				const channels = 1; // モノラル
-				const frameCount = audioContext.sampleRate * 2.0; // 2秒
-
-				const myArrayBuffer = audioContext.createBuffer(
-					channels,
-					frameCount,
-					audioContext.sampleRate
-				);
-
-				for (let channel = 0; channel < channels; channel += 1) {
-					// ホワイトノイズ生成
-					const nowBuffering = myArrayBuffer.getChannelData(channel);
-					for (let i = 0; i < frameCount; i += 1) {
-						nowBuffering[i] = Math.random() * 2 - 1;
-					}
-				}
-				gainNode.gain.value = whiteNoiseState.volume / 100;
-
-				const bufferSource = audioContext.createBufferSource();
-				setSource(bufferSource);
-				bufferSource.buffer = myArrayBuffer;
-				bufferSource.loop = true;
-				bufferSource.connect(gainNode).connect(audioContext.destination);
-				bufferSource.start();
-			}
-			dispatch(actions.setPlaying(!whiteNoiseState.playing));
-		}
-	}, [
-		audioContext,
-		gainNode,
-		whiteNoiseState.playing,
-		whiteNoiseState.volume,
-		dispatch,
-		source,
-	]);
+	const [gainNode] = React.useState<GainNode>(audioContext.createGain());
 
 	return (
 		<>
 			<p>
 				<Button
 					color={whiteNoiseState.playing ? "warning" : "primary"}
-					onClick={onClickToStartAndStop}
+					onClick={useOnClickToStartAndStop(gainNode)}
 					variant="contained"
 				>
-					ホワイトノイズ{whiteNoiseState.playing ? "停止" : "再生"}
+					{whiteNoiseState.wave === "WhiteNoise"
+						? "ホワイトノイズ"
+						: whiteNoiseState.wave === "Sine"
+						? `サイン波(${whiteNoiseState.frequency}Hz)`
+						: `矩形波(${whiteNoiseState.frequency}Hz)`}
+					{whiteNoiseState.playing ? "停止" : "再生"}
 				</Button>
 			</p>
+			<p>音量</p>
 			<p>
 				<VolumeDown />
 				<GoodWidthSlider
@@ -118,6 +68,54 @@ const WhiteNoise: React.VFC = () => {
 					valueLabelDisplay="auto"
 				/>
 				<VolumeUp />
+			</p>
+			<FormControl component="fieldset">
+				<FormLabel component="legend">再生する音の種類</FormLabel>
+				<RadioGroup
+					aria-label="wave"
+					name="radio-buttons-group"
+					onChange={(e, value) => {
+						if ((Waves as Readonly<Array<string>>).includes(value)) {
+							dispatch(actions.setWave(value as Wave));
+						}
+					}}
+					value={whiteNoiseState.wave}
+				>
+					<FormControlLabel
+						control={<Radio />}
+						disabled={whiteNoiseState.playing}
+						label={`サイン波(${whiteNoiseState.frequency}Hz)`}
+						value="Sine"
+					/>
+					<FormControlLabel
+						control={<Radio />}
+						disabled={whiteNoiseState.playing}
+						label={`矩形波(${whiteNoiseState.frequency}Hz)`}
+						value="Square"
+					/>
+					<FormControlLabel
+						control={<Radio />}
+						disabled={whiteNoiseState.playing}
+						label="ホワイトノイズ"
+						value="WhiteNoise"
+					/>
+				</RadioGroup>
+			</FormControl>
+			<p>周波数</p>
+			<p>
+				<GoodWidthSlider
+					aria-labelledby="continuous-slider"
+					disabled={whiteNoiseState.playing}
+					max={4186}
+					min={27.5}
+					onChange={(event, newValue) => {
+						if (typeof newValue === "number") {
+							dispatch(actions.setFrequency(newValue));
+						}
+					}}
+					value={whiteNoiseState.frequency}
+					valueLabelDisplay="auto"
+				/>
 			</p>
 		</>
 	);

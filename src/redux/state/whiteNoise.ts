@@ -1,11 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// webkit用Typescript型宣言
-declare global {
-	interface Window {
-		webkitAudioContext: AudioContext;
-	}
-}
+export const Waves = ["WhiteNoise", "Sine", "Square"] as const;
+export type Wave = typeof Waves[number];
 
 // Define a type for the slice state
 export interface WhiteNoiseState {
@@ -13,12 +9,18 @@ export interface WhiteNoiseState {
 	volume: number;
 	/** 再生中かどうかフラグ */
 	playing: boolean;
+	/** 再生する音の種類 */
+	wave: Wave;
+	/** 周波数 */
+	frequency: number;
 }
 
 // Define the initial state using that type
 const initialState: WhiteNoiseState = {
 	volume: 25,
 	playing: false,
+	wave: "Sine",
+	frequency: 880,
 };
 
 const whiteNoiseSlice = createSlice({
@@ -30,6 +32,12 @@ const whiteNoiseSlice = createSlice({
 		},
 		setPlaying: (state, action: PayloadAction<typeof state.playing>) => {
 			state.playing = action.payload;
+		},
+		setWave: (state, action: PayloadAction<typeof state.wave>) => {
+			state.wave = action.payload;
+		},
+		setFrequency: (state, action: PayloadAction<typeof state.frequency>) => {
+			state.frequency = action.payload;
 		},
 	},
 });
