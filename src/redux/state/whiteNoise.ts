@@ -17,10 +17,10 @@ export interface WhiteNoiseState {
 
 // Define the initial state using that type
 const initialState: WhiteNoiseState = {
-	volume: 25,
+	volume: 20,
 	playing: false,
 	wave: "Sine",
-	frequency: 880,
+	frequency: 440,
 };
 
 const whiteNoiseSlice = createSlice({

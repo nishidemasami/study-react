@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "../../redux/hooks";
 import { actions, Wave, Waves } from "../../redux/state/whiteNoise";
 import { RootState } from "../../redux/store";
 import { AppContext } from "../App/App";
-import { useOnClickToStartAndStop } from "./hook";
+import { useOnChangeFrequency, useOnClickToStartAndStop } from "./hook";
 
 /** 良い幅のスライダー */
 const GoodWidthSlider = styled(Slider)`
@@ -33,6 +33,8 @@ const WhiteNoise: React.VFC = () => {
 	const { audioContext } = React.useContext(AppContext);
 
 	const [gainNode] = React.useState<GainNode>(audioContext.createGain());
+
+	useOnChangeFrequency(gainNode);
 
 	return (
 		<>
@@ -84,50 +86,51 @@ const WhiteNoise: React.VFC = () => {
 				>
 					<FormControlLabel
 						control={<Radio />}
-						disabled={whiteNoiseState.playing}
 						label={`サイン波(${whiteNoiseState.frequency}Hz)`}
 						value="Sine"
 					/>
 					<FormControlLabel
 						control={<Radio />}
-						disabled={whiteNoiseState.playing}
 						label={`矩形波(${whiteNoiseState.frequency}Hz)`}
 						value="Square"
 					/>
 					<FormControlLabel
 						control={<Radio />}
-						disabled={whiteNoiseState.playing}
 						label="ホワイトノイズ"
 						value="WhiteNoise"
 					/>
 				</RadioGroup>
 			</FormControl>
-			<p>周波数</p>
-			<TextField
-				disabled={whiteNoiseState.playing}
-				label="周波数"
-				onChange={(element) =>
-					dispatch(actions.setFrequency(Number(element.currentTarget.value)))
-				}
-				required
-				type="number"
-				value={whiteNoiseState.frequency}
-			/>
-			<p>
-				<GoodWidthSlider
-					aria-labelledby="continuous-slider"
-					disabled={whiteNoiseState.playing}
-					max={4186}
-					min={27.5}
-					onChange={(event, newValue) => {
-						if (typeof newValue === "number") {
-							dispatch(actions.setFrequency(newValue));
+			{whiteNoiseState.wave !== "WhiteNoise" && (
+				<>
+					<p>周波数</p>
+					<TextField
+						label="周波数"
+						onChange={(element) =>
+							dispatch(
+								actions.setFrequency(Number(element.currentTarget.value))
+							)
 						}
-					}}
-					value={whiteNoiseState.frequency}
-					valueLabelDisplay="auto"
-				/>
-			</p>
+						required
+						type="number"
+						value={whiteNoiseState.frequency}
+					/>
+					<p>
+						<GoodWidthSlider
+							aria-labelledby="continuous-slider"
+							max={4186}
+							min={27.5}
+							onChange={(event, newValue) => {
+								if (typeof newValue === "number") {
+									dispatch(actions.setFrequency(newValue));
+								}
+							}}
+							value={whiteNoiseState.frequency}
+							valueLabelDisplay="auto"
+						/>
+					</p>
+				</>
+			)}
 		</>
 	);
 };
