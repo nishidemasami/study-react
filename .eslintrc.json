@@ -84,7 +84,7 @@
 			{ "namedComponents": "arrow-function" }
 		],
 
-		// This Project Only
+		// THIS PROJECT ONLY * For my OPINIONATED rules
 		"react/jsx-no-literals": "off",
 		"react/jsx-max-depth": "off",
 		"react/jsx-no-bind": "off",
@@ -95,7 +95,7 @@
 
 		// for prettier
 		"comma-dangle": "off",
-		"indent": ["error", "tab"],
+		"indent": "off",
 
 		// for TypeScript
 		"no-use-before-define": "off",
@@ -108,7 +108,7 @@
 		// for webpack
 		"import/extensions": ["off", [".js", ".jsx", ".json", ".ts", ".tsx"]],
 
-		// Autofix
+		// AutoFix
 		"import/order": "warn",
 		"prettier/prettier": "warn"
 	}

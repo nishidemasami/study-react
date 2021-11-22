@@ -8,6 +8,7 @@ import {
 	Radio,
 	RadioGroup,
 	Slider,
+	TextField,
 } from "@mui/material";
 import React from "react";
 import { shallowEqual } from "react-redux";
@@ -102,6 +103,16 @@ const WhiteNoise: React.VFC = () => {
 				</RadioGroup>
 			</FormControl>
 			<p>周波数</p>
+			<TextField
+				disabled={whiteNoiseState.playing}
+				label="周波数"
+				onChange={(element) =>
+					dispatch(actions.setFrequency(Number(element.currentTarget.value)))
+				}
+				required
+				type="number"
+				value={whiteNoiseState.frequency}
+			/>
 			<p>
 				<GoodWidthSlider
 					aria-labelledby="continuous-slider"
