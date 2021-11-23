@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "../../redux/hooks";
 import { actions, Wave, Waves } from "../../redux/state/whiteNoise";
 import { RootState } from "../../redux/store";
 import { AppContext } from "../App/App";
-import { useOnChangeFrequency, useOnClickToStartAndStop } from "./hook";
+import { useOnChangeFrequency, useOnChangeSource, useOnPaly } from "./hook";
 
 /** 良い幅のスライダー */
 const GoodWidthSlider = styled(Slider)`
@@ -35,13 +35,17 @@ const WhiteNoise: React.VFC = () => {
 	const [gainNode] = React.useState<GainNode>(audioContext.createGain());
 
 	useOnChangeFrequency(gainNode);
+	useOnPaly(gainNode);
+	useOnChangeSource(gainNode);
 
 	return (
 		<>
 			<p>
 				<Button
 					color={whiteNoiseState.playing ? "warning" : "primary"}
-					onClick={useOnClickToStartAndStop(gainNode)}
+					onClick={() => {
+						dispatch(actions.setPlaying(!whiteNoiseState.playing));
+					}}
 					variant="contained"
 				>
 					{whiteNoiseState.wave === "WhiteNoise"

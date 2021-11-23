@@ -23,9 +23,11 @@ export const useAppContext = (): AppContextProps => {
 	);
 	const [source, setSourceWork] = React.useState<AudioBufferSourceNode>();
 	const setSource = (prmSource?: AudioBufferSourceNode) => {
-		if (source) {
-			source.stop();
-			source.buffer = null; // メモリリーク防止
+		if (prmSource === undefined) {
+			if (source) {
+				source.stop();
+				source.buffer = null; // メモリリーク防止
+			}
 		}
 		setSourceWork(prmSource);
 	};
