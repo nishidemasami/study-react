@@ -1,6 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export const Waves = ["WhiteNoise", "Sine", "Square"] as const;
+export const Waves = [
+	"WhiteNoise",
+	"Sine",
+	"Square",
+	"Triangle",
+	"Sawtooth",
+] as const;
 export type Wave = typeof Waves[number];
 
 // Define a type for the slice state
@@ -17,7 +23,7 @@ export interface WhiteNoiseState {
 
 // Define the initial state using that type
 const initialState: WhiteNoiseState = {
-	volume: 20,
+	volume: 50,
 	playing: false,
 	wave: "Sine",
 	frequency: 440,
@@ -37,7 +43,9 @@ const whiteNoiseSlice = createSlice({
 			state.wave = action.payload;
 		},
 		setFrequency: (state, action: PayloadAction<typeof state.frequency>) => {
-			state.frequency = action.payload;
+			if (action.payload > 0) {
+				state.frequency = action.payload;
+			}
 		},
 	},
 });

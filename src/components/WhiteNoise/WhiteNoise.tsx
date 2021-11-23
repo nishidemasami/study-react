@@ -16,7 +16,11 @@ import { useDispatch, useSelector } from "../../redux/hooks";
 import { actions, Wave, Waves } from "../../redux/state/whiteNoise";
 import { RootState } from "../../redux/store";
 import { AppContext } from "../App/App";
-import { useOnChangeFrequency, useOnClickToStartAndStop } from "./hook";
+import {
+	useOnChangeFrequency,
+	useOnChangeVolume,
+	useOnClickToStartAndStop,
+} from "./hook";
 
 /** 良い幅のスライダー */
 const GoodWidthSlider = styled(Slider)`
@@ -36,6 +40,12 @@ const WhiteNoise: React.VFC = () => {
 
 	useOnChangeFrequency(gainNode);
 
+	useOnChangeVolume(gainNode);
+
+	const [freqSlider, setFreqSlider] = React.useState(
+		Math.sqrt(whiteNoiseState.frequency)
+	);
+
 	return (
 		<>
 			<p>
@@ -48,7 +58,11 @@ const WhiteNoise: React.VFC = () => {
 						? "ホワイトノイズ"
 						: whiteNoiseState.wave === "Sine"
 						? `サイン波(${whiteNoiseState.frequency}Hz)`
-						: `矩形波(${whiteNoiseState.frequency}Hz)`}
+						: whiteNoiseState.wave === "Square"
+						? `矩形波(${whiteNoiseState.frequency}Hz)`
+						: whiteNoiseState.wave === "Triangle"
+						? `三角波(${whiteNoiseState.frequency}Hz)`
+						: `のこぎり波(${whiteNoiseState.frequency}Hz)`}
 					{whiteNoiseState.playing ? "停止" : "再生"}
 				</Button>
 			</p>
@@ -62,9 +76,6 @@ const WhiteNoise: React.VFC = () => {
 					onChange={(event, newValue) => {
 						if (typeof newValue === "number") {
 							dispatch(actions.setVolume(newValue));
-							if (gainNode) {
-								gainNode.gain.value = newValue / 100;
-							}
 						}
 					}}
 					value={whiteNoiseState.volume}
@@ -96,6 +107,16 @@ const WhiteNoise: React.VFC = () => {
 					/>
 					<FormControlLabel
 						control={<Radio />}
+						label={`三角波(${whiteNoiseState.frequency}Hz)`}
+						value="Triangle"
+					/>
+					<FormControlLabel
+						control={<Radio />}
+						label={`のこぎり波(${whiteNoiseState.frequency}Hz)`}
+						value="Sawtooth"
+					/>
+					<FormControlLabel
+						control={<Radio />}
 						label="ホワイトノイズ"
 						value="WhiteNoise"
 					/>
@@ -106,11 +127,11 @@ const WhiteNoise: React.VFC = () => {
 					<p>周波数</p>
 					<TextField
 						label="周波数"
-						onChange={(element) =>
-							dispatch(
-								actions.setFrequency(Number(element.currentTarget.value))
-							)
-						}
+						onChange={(element) => {
+							const value = Number(element.currentTarget.value);
+							dispatch(actions.setFrequency(value));
+							setFreqSlider(Math.sqrt(value));
+						}}
 						required
 						type="number"
 						value={whiteNoiseState.frequency}
@@ -118,15 +139,18 @@ const WhiteNoise: React.VFC = () => {
 					<p>
 						<GoodWidthSlider
 							aria-labelledby="continuous-slider"
-							max={4186}
-							min={27.5}
+							max={65}
+							min={5}
 							onChange={(event, newValue) => {
 								if (typeof newValue === "number") {
-									dispatch(actions.setFrequency(newValue));
+									dispatch(actions.setFrequency(newValue ** 2));
+									setFreqSlider(newValue);
 								}
 							}}
-							value={whiteNoiseState.frequency}
+							step={1}
+							value={freqSlider}
 							valueLabelDisplay="auto"
+							valueLabelFormat={(value) => value ** 2}
 						/>
 					</p>
 				</>

@@ -59,15 +59,19 @@ const App: React.VFC = () => {
 	);
 	const dispatch = useDispatch();
 
+	const appContext = useAppContext();
+
 	React.useEffect(() => {
 		dispatch(init());
+		return () => {
+			appContext.setSource();
+		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dispatch]);
 
 	React.useEffect(() => {
 		dispatch(saveLocalStorage({ appState, countState, spinLogoState }));
 	}, [dispatch, appState, countState, spinLogoState]);
-
-	const appContext = useAppContext();
 
 	return (
 		<React.StrictMode>

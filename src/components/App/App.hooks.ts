@@ -14,7 +14,7 @@ export type AppContextProps = {
 	/** オーディオソース */
 	source?: AudioBufferSourceNode;
 	/** オーディオソースの設定 */
-	setSource: (source: AudioBufferSourceNode) => void;
+	setSource: (source?: AudioBufferSourceNode) => void;
 };
 
 export const useAppContext = (): AppContextProps => {
@@ -24,8 +24,10 @@ export const useAppContext = (): AppContextProps => {
 	const [source, setSourceWork] = React.useState<AudioBufferSourceNode>();
 	const setSource = (prmSource?: AudioBufferSourceNode) => {
 		if (source) {
-			source.stop();
-			source.buffer = null; // メモリリーク防止
+			if (source) {
+				source.stop();
+				source.buffer = null; // メモリリーク防止
+			}
 		}
 		setSourceWork(prmSource);
 	};
