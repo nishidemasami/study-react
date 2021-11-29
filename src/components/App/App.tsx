@@ -63,10 +63,6 @@ const App: React.VFC = () => {
 
 	React.useEffect(() => {
 		dispatch(init());
-		return () => {
-			appContext.setSource();
-		};
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dispatch]);
 
 	React.useEffect(() => {

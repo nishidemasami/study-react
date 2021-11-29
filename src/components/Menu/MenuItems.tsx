@@ -3,6 +3,7 @@ import {
 	Autorenew,
 	Help,
 	Home,
+	Info,
 	Map,
 	PlusOne,
 	Settings,
@@ -15,6 +16,7 @@ import Count from "../Count";
 import HelpPage from "../HelpPage";
 import SiteMap from "../SiteMap";
 import SpinLogo from "../SpinLogo";
+import Version from "../Version";
 import WelcomePage from "../WelcomePage";
 import WhiteNoise from "../WhiteNoise";
 
@@ -88,6 +90,12 @@ const MenuItems: {
 				生成するページです。
 			</>
 		),
+	},
+	version: {
+		component: <Version />,
+		name: "バージョン情報",
+		icon: <Info />,
+		description: "バージョン情報です。",
 	},
 };
 

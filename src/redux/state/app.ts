@@ -10,6 +10,7 @@ export const menuList = [
 	"configPage",
 	"siteMap",
 	"helpPage",
+	"version",
 ] as const;
 
 /** メニュー一覧タイプ */

@@ -26,3 +26,13 @@ export const SitemapCard = styled(Card)`
 	text-align: left;
 	width: fit-content;
 `;
+
+export const FlexColumn = styled.div`
+	flex-direction: column;
+	display: flex;
+`;
+
+export const FitContentCenteringFlexColumn = styled(FlexColumn)`
+	width: fit-content;
+	margin: 5px auto;
+`;

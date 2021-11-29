@@ -4,7 +4,6 @@ import bitcoinReducer from "./state/bitcoin";
 import countReducer from "./state/count";
 import cubeReducer from "./state/cube";
 import spinLogoReducer from "./state/spinLogo";
-import whiteNoiseReducer from "./state/whiteNoise";
 
 export const store = configureStore({
 	reducer: {
@@ -13,7 +12,6 @@ export const store = configureStore({
 		countState: countReducer,
 		cubeState: cubeReducer,
 		spinLogoState: spinLogoReducer,
-		whiteNoiseState: whiteNoiseReducer,
 	},
 });
 
