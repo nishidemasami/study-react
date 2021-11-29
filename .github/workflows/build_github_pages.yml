@@ -29,6 +29,22 @@ jobs:
       - name: install
         run: yarn install --frozen-lockfile
 
+      - name: Get latest version
+        id: get_version
+        run: |
+          LATEST_VERSION=$(git tag --sort=-creatordate | head -1)
+          echo ::set-output name=LATEST_VERSION::$LATEST_VERSION
+
+      - name: Get latest build
+        id: get_build
+        run: |
+          LATEST_BUILD=$(git rev-parse HEAD)
+          echo ::set-output name=LATEST_BUILD::$LATEST_BUILD
+
+      - name: Update package.json
+        run: |
+          npm --no-git-tag-version version ${{ steps.get_version.outputs.LATEST_VERSION }}-${{ steps.get_build.outputs.LATEST_BUILD }}
+
       - name: test
         run: yarn test
 
